@@ -1,0 +1,410 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"pla",
+				"playerList"
+			],
+			[
+				"Pl",
+				"PLAYERS"
+			],
+			[
+				"play",
+				"playerID"
+			],
+			[
+				"res",
+				"request"
+			],
+			[
+				"phas",
+				"phaseCount"
+			],
+			[
+				"bot",
+				"botStutter"
+			],
+			[
+				"bo",
+				"botStutter"
+			],
+			[
+				"app",
+				"append"
+			],
+			[
+				"r",
+				"roomList"
+			],
+			[
+				"add",
+				"add_player"
+			],
+			[
+				"playe",
+				"playersInQueue"
+			],
+			[
+				"player",
+				"playerList"
+			],
+			[
+				"room",
+				"roomList"
+			],
+			[
+				"va",
+				"validNeighbors"
+			],
+			[
+				"c",
+				"c"
+			],
+			[
+				"ge",
+				"generateMaze"
+			],
+			[
+				"nei",
+				"neighbor"
+			],
+			[
+				"rand",
+				"randInt"
+			],
+			[
+				"h",
+				"highlight"
+			],
+			[
+				"ra",
+				"randInt"
+			],
+			[
+				"ne",
+				"getNextNeighbor"
+			],
+			[
+				"len",
+				"length-1"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"contents": "import React, { Component } from 'react';\nimport { Platform, StyleSheet, Text, View, FlatList, StatusBar } from 'react-native';\nimport PantryCard from \"./components/PantryCard\"\nexport default class HomeView extends Component {\n render(){ \n  return (\n    <View style={styles.container}>\n    <Text style={{ fontSize:21,fontWeight:'bold', fontFamily:'Roboto'}}>Select a location</Text>       \n    </View>\n  );\n}\n}\n\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n\n    backgroundColor: '#eeeeee',\n    justifyContent: 'center',\n    paddingTop: Platform.OS ==\"ios\" ? 0: StatusBar.currentHeight\n  },\n});\n",
+			"file": "App.js",
+			"file_size": 612,
+			"file_write_time": 132098687559696344,
+			"settings":
+			{
+				"buffer_size": 613,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "components/LocationCard.js",
+			"settings":
+			{
+				"buffer_size": 173,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/Python/Python.sublime-build",
+					""
+				],
+				[
+					"Packages/Python/Python.sublime-build",
+					"Syntax Check"
+				]
+			],
+			[
+				"Packages/Python/Python.sublime-build",
+				""
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"pack",
+				"Package Control: List Packages"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"for",
+				"CodeFormatter: Format Code"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/D/Programming Projects/PantryFinder",
+		"/D/Programming Projects/PantryFinder/components",
+		"/D/Programming Projects/RealtimeMazeGame",
+		"/D/Programming Projects/RealtimeMazeGame/templates"
+	],
+	"file_history":
+	[
+		"/C/Users/fufu/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
+		"/C/Users/fufu/AppData/Roaming/Sublime Text 3/Packages/User/Emmet.sublime-settings",
+		"/D/Programming Projects/PantryFinder/pantryfinder.sublime-project",
+		"/D/Programming Projects/RealtimeMazeGame/server.py",
+		"/D/Programming Projects/PantryFinder/App.js",
+		"/D/Programming Projects/PantryFinder/components/PantryCard.js",
+		"/D/Programming Projects/RealtimeMazeGame/static/index.js",
+		"/D/Programming Projects/RealtimeMazeGame/templates/index.html",
+		"/D/Programming Projects/RealtimeMazeGame/gamelogic.py",
+		"/D/Programming Projects/RealtimeMazeGame/index.js",
+		"/D/Programming Projects/RealtimeMazeGame/style.css",
+		"/D/Programming Projects/RealtimeMazeGame/index.html",
+		"/D/Programming Projects/RealtimeMazeGame/socket.io.js",
+		"/C/Users/fufu/Documents/TechLeadMazeGame/Maze Real-Time with Firebase Demo_files/app.js.download",
+		"/C/Users/fufu/Documents/TechLeadMazeGame/Maze Real-Time with Firebase Demo.html",
+		"/C/Users/fufu/Documents/TechLeadMazeGame/Maze Real-Time with Firebase Demo_files/firebase-app.js.download",
+		"/D/Programming Projects/Portfolio/index.html"
+	],
+	"find":
+	{
+		"height": 27.0
+	},
+	"find_in_files":
+	{
+		"height": 101.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"\t\t\n",
+			"setTim",
+			"5",
+			"stretch",
+			"rand",
+			"isVisted",
+			"isVisited",
+			"visited",
+			"next",
+			"top"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"visited",
+			"right",
+			"left",
+			"bottom"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "App.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 613,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								476,
+								476
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "components/LocationCard.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 173,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								165,
+								165
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 27.0
+	},
+	"input":
+	{
+		"height": 40.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 428.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "pantryfinder.sublime-project",
+	"replace":
+	{
+		"height": 50.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 269.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
