@@ -16,7 +16,7 @@ const HomeStack= createStackNavigator({
       backgroundColor:'#6C8241'
     },
     headerTintColor:'#FFFFFF',
-    title:'Home',
+    title:'Locations',
   }
 }
 );
@@ -36,7 +36,7 @@ const SocialStack= createStackNavigator({
 
 const App=createBottomTabNavigator(
 {
-  Home: {screen: HomeStack},
+  Locations: {screen: HomeStack},
   Updates: {screen : SocialStack}
 },
 {
@@ -45,9 +45,9 @@ const App=createBottomTabNavigator(
     const { routeName }= navigation.state;
     let IconComponent = Ionicons;
     let iconName;
-    if (routeName == "Home")
+    if (routeName == "Locations")
     {
-      iconName=`md-home`;
+      iconName=`md-map`;
     }
     else if (routeName=="Updates")
     {
