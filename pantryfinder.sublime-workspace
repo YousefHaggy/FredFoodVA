@@ -4,6 +4,22 @@
 		"selected_items":
 		[
 			[
+				"Pant",
+				"PantryCard"
+			],
+			[
+				"resp",
+				"responseJson"
+			],
+			[
+				"pantr",
+				"pantryList"
+			],
+			[
+				"res",
+				"responseJson"
+			],
+			[
 				"spread",
 				"spreadsheetId"
 			],
@@ -58,10 +74,6 @@
 			[
 				"play",
 				"playerID"
-			],
-			[
-				"res",
-				"request"
 			],
 			[
 				"phas",
@@ -143,28 +155,37 @@
 			"file": "App.js",
 			"settings":
 			{
-				"buffer_size": 1651,
+				"buffer_size": 1928,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"contents": "import React, { Component } from 'react';\nimport { ListView, Platform, StyleSheet, Text, View, FlatList, StatusBar } from 'react-native';\nimport PantryCard from \"./components/PantryCard\"\nimport LocationCard from \"./components/LocationCard\"\nimport config from './config/config'\nimport google from 'googleapis'\nexport default class HomeScreen extends Component {\n    let pantriesList;\nasync function getPantries(){\n  const sheets = google.sheets({version: 'v4'});\n  sheets.spreadsheets.values.get({spreadsheetId:config.spreadsheetId,\n    range: 'Class Data!A2:E',},);\n}\n  componentDidMount(){\n   pantriesList=getPantries();   \n  }\n\n  constructor(){\n    super();\n    const ds= new ListView.DataSource({rowHadChanged:(r1,r2)=> r1 !==r2});\n    this.state={\n      dataSource:ds.cloneWithRows(['row 1','row2 '])\n    }\n  }\n render(){ \n  return (\n    <View style={styles.container}>\n    <LocationCard pantryName=\"Spotsylvania\"></LocationCard>\n    <LocationCard pantryName=\"Stafford\"></LocationCard>\n\n    </View>\n  );\n}\n}\n\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    backgroundColor: '#eeeeee',\n    justifyContent: 'flex-start',\n  },\n});\n",
 			"file": "HomeScreen.js",
-			"file_size": 1193,
-			"file_write_time": 132101076716355352,
 			"settings":
 			{
-				"buffer_size": 1152,
+				"buffer_size": 1975,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "components/LocationCard.js",
+			"file": "PantryScreen.js",
 			"settings":
 			{
-				"buffer_size": 996,
+				"buffer_size": 680,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "import React, { Component } from 'react';\nimport { Platform, FlatList, StyleSheet, Text, View } from 'react-native';\nimport { Button } from 'native-base'\nexport default class PantryCard extends Component{\n\trender(){\n\t\treturn(\n\t\t\t<View style={styles.card}>\n\t\t\t<Text style={{fontSize:20, fontWeight:'bold'}}> {this.props.pantryName} </Text>\n\t\t\t<Text>{this.props.pantryAddress}</Text>\n\t\t\t<Text>{this.props.pantryHours}</Text>\n\t\t\t<Button small style={{justifyContent:'center', marginTop:10, backgroundColor:'#F59300'}}><Text style={{fontSize:20, fontWeight:'bold', color:'white'}}>Get Directions</Text></Button>\n\t\t\t</View>\n\t\t);\n\t}\n}\nconst styles= StyleSheet.create({\n\tcard:{\n\t\theight:'auto',\n\t\tjustifyContent:'space-between',\n\t\tflexDirection:'column',\n\t\tpadding:5,\n\t\tflexWrap:'wrap',\n\t\tborderRadius:3,\n\t\tmargin: 5, \n\t\tbackgroundColor:'#FFF',\n\t\t...Platform.select({\n\t\t\tios:{\n\t\t\t\tshadowColor:\"#000\",\n\t\t\t\tshadowOffset: { width:0, height:1},\n\t\t\t\tshadowOpacity:0.8,\n\t\t\t\tshadowRadius:1,\n\t\t\t},\n\t\t\tandroid:{\n\t\t\t\televation:5\n\t\t\t}\n\t\t}),\n\n\t}\n}); ",
+			"file": "components/PantryCard.js",
+			"file_size": 1073,
+			"file_write_time": 132101313733591745,
+			"settings":
+			{
+				"buffer_size": 1031,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -183,7 +204,7 @@
 			"file": "config/config.js",
 			"settings":
 			{
-				"buffer_size": 161,
+				"buffer_size": 145,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -217,6 +238,14 @@
 		"selected_items":
 		[
 			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control:re",
+				"Package Control: Remove Package"
+			],
+			[
 				"insat",
 				"Package Control: Install Package"
 			],
@@ -245,7 +274,7 @@
 	},
 	"console":
 	{
-		"height": 0.0,
+		"height": 337.0,
 		"history":
 		[
 		]
@@ -270,6 +299,7 @@
 	],
 	"file_history":
 	[
+		"/D/Programming Projects/PantryFinder/node_modules/@babel/parser/CHANGELOG.md",
 		"/C/Users/fufu/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
 		"/D/Programming Projects/RealtimeMazeGame/templates/details.html",
 		"/D/Programming Projects/RealtimeMazeGame/server.py",
@@ -305,6 +335,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			">\n",
 			"5",
 			"flex",
 			"',\n",
@@ -339,7 +370,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 3,
 			"sheets":
 			[
 				{
@@ -348,15 +379,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1651,
+						"buffer_size": 1928,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1299,
-								1299
+								41,
+								41
 							]
 						],
 						"settings":
@@ -378,15 +409,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1152,
+						"buffer_size": 1975,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								810,
-								810
+								1376,
+								1376
 							]
 						],
 						"settings":
@@ -396,27 +427,27 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 54.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "components/LocationCard.js",
+					"file": "PantryScreen.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 996,
+						"buffer_size": 680,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								657,
-								657
+								678,
+								678
 							]
 						],
 						"settings":
@@ -427,11 +458,39 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
 					"buffer": 3,
+					"file": "components/PantryCard.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1031,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								837,
+								837
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax"
+						},
+						"translation.x": 91.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
 					"file": "SocialScreen.js",
 					"semi_transient": false,
 					"settings":
@@ -443,8 +502,8 @@
 						"selection":
 						[
 							[
-								183,
-								183
+								130,
+								130
 							]
 						],
 						"settings":
@@ -456,24 +515,24 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 5,
 					"file": "config/config.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 161,
+						"buffer_size": 145,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								116,
-								128
+								36,
+								36
 							]
 						],
 						"settings":
@@ -484,7 +543,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 5,
 					"type": "text"
 				}
 			]

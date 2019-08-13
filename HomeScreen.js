@@ -38,7 +38,7 @@ export default class HomeScreen extends Component {
             <View style={styles.container}>
             <FlatList data={this.state.areaList} 
             renderItem={({item})=><LocationCard areaName={item} navigation={this.props.navigation} pantryList={this.state.pantryList[`${item}`]}></LocationCard>}
-            ListEmptyComponent={<Text  style={{fontSize:20, fontWeight:'bold', textAlign:'center', marginTop:10}}>Loading pantries</Text>}></FlatList>
+            ListEmptyComponent={<Text style={{fontSize:20, fontWeight:'bold', textAlign:'center', textAlignVertical: "center"}}>Loading pantries</Text>}></FlatList>
       
     </View>
         );
