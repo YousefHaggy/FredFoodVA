@@ -4,8 +4,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome"
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
 export default class LocationCard extends Component{
 	render(){
+		console.log(this.props.pantryList)
 		return(
-		<TouchableOpacity style={styles.card}>
+		<TouchableOpacity style={styles.card} onPress={()=>this.props.navigation.navigate("Pantries",{pantryList:this.props.pantryList, title:this.props.areaName})}>
 			<Text style={{fontSize:20, fontWeight:'bold'}}> {this.props.areaName} </Text>
 			<FontAwesomeIcon icon={ faChevronRight } style={{alignSelf:'center', color:"#F59300"}}>test </FontAwesomeIcon>
 		 

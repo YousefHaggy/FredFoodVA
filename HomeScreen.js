@@ -8,13 +8,16 @@ export default class HomeScreen extends Component {
         try {
             let response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${config.sheets.spreadsheetId}/values/A2:E?key=${config.sheets.apiKey}`);
             let responseJson = await response.json();
-            var areaList = new Array();
+            let areaList = new Array();
+            let pantryList= new Object();
             responseJson.values.forEach((value, index) => {
                 if (!areaList.includes(value[0])) {
                     areaList.push(value[0])
+                    pantryList[value[0]]=new Array();
                 }
+                pantryList[value[0]].push(value)
             });
-            this.setState({ pantryList: responseJson.values, areaList: areaList, listLoaded: true });
+            this.setState({ pantryList: pantryList, areaList: areaList });
         } catch (error) {
             console.log('error')
         }
@@ -27,15 +30,16 @@ export default class HomeScreen extends Component {
         super();
         this.state = {
             pantryList: [],
-            listLoaded: false
         }
     }
     render() {
+      console.log(this.state.pantryList)
         return (
             <View style={styles.container}>
             <FlatList data={this.state.areaList} 
-            renderItem={({item})=><LocationCard areaName={item}></LocationCard>}
-            ListEmptyComponent={<Text>Loading pantries</Text>}></FlatList>
+            renderItem={({item})=><LocationCard areaName={item} navigation={this.props.navigation} pantryList={this.state.pantryList[`${item}`]}></LocationCard>}
+            ListEmptyComponent={<Text  style={{fontSize:20, fontWeight:'bold', textAlign:'center', marginTop:10}}>Loading pantries</Text>}></FlatList>
+      
     </View>
         );
     }
