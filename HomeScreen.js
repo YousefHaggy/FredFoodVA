@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View, FlatList, StatusBar } from 'react-native';
+import { AsyncStorage, Platform, StyleSheet, Text, View, FlatList, StatusBar } from 'react-native';
 import PantryCard from "./components/PantryCard"
 import LocationCard from "./components/LocationCard"
 import config from './config/config'
@@ -9,17 +9,31 @@ export default class HomeScreen extends Component {
             let response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${config.sheets.spreadsheetId}/values/A2:E?key=${config.sheets.apiKey}`);
             let responseJson = await response.json();
             let areaList = new Array();
-            let pantryList= new Object();
+            let pantryList = new Object();
             responseJson.values.forEach((value, index) => {
                 if (!areaList.includes(value[0])) {
                     areaList.push(value[0])
-                    pantryList[value[0]]=new Array();
+                    pantryList[value[0]] = new Array();
                 }
                 pantryList[value[0]].push(value)
             });
             this.setState({ pantryList: pantryList, areaList: areaList });
+            _storeData = async () => {
+                try {
+                    await AsyncStorage.setItem("pantryList", pantryList)
+                    await AsyncStorage.setItem("areaList", areaList)
+                } catch (error) {
+                }
+            }
         } catch (error) {
-            console.log('error')
+            _retrieveData = async ()=>{
+                const pantryList=await AsyncStorage.getItem("pantryList")
+                const areaList= await AsyncStorage.getItem("areaList")
+                if (pantryList != null&& areaList!=null)
+                {
+                    this.setState({ pantryList: pantryList, areaList: areaList });
+                }
+            }
         }
     }
     componentDidMount() {
@@ -33,7 +47,7 @@ export default class HomeScreen extends Component {
         }
     }
     render() {
-      console.log(this.state.pantryList)
+        console.log(this.state.pantryList)
         return (
             <View style={styles.container}>
             <FlatList data={this.state.areaList} 
