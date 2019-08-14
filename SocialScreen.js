@@ -27,8 +27,12 @@ export default class SocialScreen extends Component{
 	}
 	render(){
 		return(
-			<FlatList data={this.state.tweets} renderItem={({item})=><SocialCard tweetText={item} />} 
-			ListEmptyComponent={<Text style={{fontSize:20, fontWeight:'bold', textAlign:'center', textAlignVertical: "center"}}>Loading updates</Text>}
+			<FlatList data={this.state.tweets} renderItem={({item})=><SocialCard tweetText={item['tweet']} 
+			tweetPicture={item['pic']}
+			tweetDate={item['date']}
+			/>} 
+			ListEmptyComponent={<Text style={{fontSize:20, fontWeight:'bold', textAlign:'center', textAlignVertical: "center"}}>
+			Loading updates, please ensure you have an internet connection</Text>}
 			/>
 					)
 }
