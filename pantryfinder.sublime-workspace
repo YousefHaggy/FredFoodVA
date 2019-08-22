@@ -184,10 +184,13 @@
 	"buffers":
 	[
 		{
+			"contents": "import React, { Component } from 'react';\nimport { Platform, StyleSheet, Text, View, FlatList, StatusBar } from 'react-native';\nimport PantryCard from \"./components/PantryCard\"\nimport LocationCard from \"./components/LocationCard\"\nimport Ionicons from 'react-native-vector-icons/Ionicons'\nimport { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation'\nimport HomeScreen from './HomeScreen'\nimport SocialScreen from './SocialScreen'\nimport PantryScreen from './PantryScreen'\nimport { Notifications } from 'expo'\nimport * as Permissions from 'expo-permissions'\n// Push notifcations\nconst PUSH_ENDPOINT=\"https://fredfoodbank.pythonanywhere.com/push_token\"\n\nasync function registerForPushNotifications()\n{\n    const { status : existingStatus}= await Permissions.getAsync(\n        Permissions.NOTIFICATIONS\n        );\n    let finalStatus= existingStatus;\n\n    if (existingStatus!==\"granted\")\n    {\n        const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);\n        finalStatus=status;\n    }\n\n    if(finalStatus!==\"granted\"){\n        return;\n    }\n\n    let token = await Notifications.getExpoPushTokenAsync();\n    console.log(token)\n    return fetch(PUSH_ENDPOINT,{\n        method:'POST',\n        headers:{\n            Accept: 'application/json',\n            'Content-Type': 'application/json',\n        },\n        body: JSON.stringify({\n            token:{\n                value:token,\n            },\n        }),\n    });\n    console.log(\"function called\")\n}\nregisterForPushNotifications();\n// Navigation\nconst HomeStack = createStackNavigator({\n    Home: { screen: HomeScreen },\n    Pantries: { screen: PantryScreen }\n}, {\n    defaultNavigationOptions: {\n        headerStyle: {\n            backgroundColor: '#6C8241'\n        },\n        headerTintColor: '#FFFFFF',\n        title: 'Locations',\n    }\n});\nconst SocialStack = createStackNavigator({\n    SocialScreen: { screen: SocialScreen }\n}, {\n    defaultNavigationOptions: {\n        headerStyle: {\n            backgroundColor: '#6C8241'\n        },\n        headerTintColor: '#FFFFFF',\n        title: 'Updates',\n    }\n});\n\nconst App = createBottomTabNavigator({\n    Locations: { screen: HomeStack },\n    Updates: { screen: SocialStack }\n}, {\n    defaultNavigationOptions: ({ navigation }) => ({\n        tabBarIcon: ({ focused, horizontal, tintColor }) => {\n            const { routeName } = navigation.state;\n            let IconComponent = Ionicons;\n            let iconName;\n            if (routeName == \"Locations\") {\n                iconName = `md-map`;\n            } else if (routeName == \"Updates\") {\n                iconName = 'md-cloud'\n            }\n            return <IconComponent name={iconName} size={25} color={tintColor} />;\n        },\n\n    }),\n    tabBarOptions: {\n        activeTintColor: '#F59300',\n        inactiveTintColor: 'white',\n        style: {\n            backgroundColor: '#6C8241'\n        },\n    },\n});\n\nexport default createAppContainer(App);",
 			"file": "App.js",
+			"file_size": 2988,
+			"file_write_time": 132109859514267436,
 			"settings":
 			{
-				"buffer_size": 2902,
+				"buffer_size": 2975,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -208,14 +211,6 @@
 			{
 				"buffer_size": 1083,
 				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "components/PantryCard.js",
-			"settings":
-			{
-				"buffer_size": 1417,
 				"line_ending": "Windows"
 			}
 		},
@@ -314,8 +309,6 @@
 		"/D/Programming Projects/PantryFinder/assets",
 		"/D/Programming Projects/PantryFinder/components",
 		"/D/Programming Projects/PantryFinder/config",
-		"/D/Programming Projects/PantryFinder/node_modules",
-		"/D/Programming Projects/PantryFinder/node_modules/react-native",
 		"/D/Programming Projects/PantryFinder/python"
 	],
 	"file_history":
@@ -345,7 +338,7 @@
 	],
 	"find":
 	{
-		"height": 29.0
+		"height": 34.0
 	},
 	"find_in_files":
 	{
@@ -403,15 +396,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2902,
+						"buffer_size": 2975,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1461,
-								1461
+								1455,
+								1455
 							]
 						],
 						"settings":
@@ -421,7 +414,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 180.0,
+						"translation.y": 330.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -454,7 +447,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -483,40 +476,11 @@
 						"translation.y": 7.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
 					"buffer": 3,
-					"file": "components/PantryCard.js",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 1417,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								582,
-								665
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
 					"file": "PantryScreen.js",
 					"semi_transient": false,
 					"settings":
@@ -540,7 +504,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
@@ -548,7 +512,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 29.0
+		"height": 34.0
 	},
 	"input":
 	{
@@ -589,7 +553,7 @@
 	"project": "pantryfinder.sublime-project",
 	"replace":
 	{
-		"height": 54.0
+		"height": 64.0
 	},
 	"save_all_on_build": true,
 	"select_file":
