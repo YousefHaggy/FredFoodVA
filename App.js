@@ -7,6 +7,46 @@ import { createStackNavigator, createBottomTabNavigator, createAppContainer } fr
 import HomeScreen from './HomeScreen'
 import SocialScreen from './SocialScreen'
 import PantryScreen from './PantryScreen'
+import { Permissions, Notifications } from 'expo'
+// Push notifcations
+const PUSH_ENDPOINT="http://localhost:5000/push_token"
+
+async function registerForPushNotifications()
+{
+    const { status : existingStatus}= await Permissions.getAsync(
+        Permissions.NOTIFICATIONS
+        );
+    let finalStatus= existingStatus;
+
+    if (existingStatus!=="granted")
+    {
+        const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+        finalStatus=status;
+    }
+
+    if(finalStatus!=="granted"){
+        return;
+    }
+
+    let token = await Notifications.getExpoPushTokenAsync();
+
+    return fetch(PUSH_ENDPOINT,{
+        method:'POST',
+        headers:{
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            token:{
+                value:token,
+            },
+            user:{
+                username: 'Brent',
+            },
+        });
+    });
+}
+// Navigation
 const HomeStack = createStackNavigator({
     Home: { screen: HomeScreen },
     Pantries: { screen: PantryScreen }

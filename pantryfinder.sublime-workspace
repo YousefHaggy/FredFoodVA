@@ -4,6 +4,30 @@
 		"selected_items":
 		[
 			[
+				"twee",
+				"tweetPicture"
+			],
+			[
+				"wi",
+				"width"
+			],
+			[
+				"find",
+				"find_all"
+			],
+			[
+				"tweet",
+				"tweetDate"
+			],
+			[
+				"Socia",
+				"SocialCard"
+			],
+			[
+				"styl",
+				"styles"
+			],
+			[
 				"as",
 				"AsyncStorage"
 			],
@@ -42,10 +66,6 @@
 			[
 				"font",
 				"font-size\tproperty"
-			],
-			[
-				"Socia",
-				"SocialScreen"
 			],
 			[
 				"Sett",
@@ -173,22 +193,37 @@
 			}
 		},
 		{
-			"file": "HomeScreen.js",
+			"file": "SocialScreen.js",
 			"settings":
 			{
-				"buffer_size": 2619,
+				"buffer_size": 1096,
+				"encoding": "UTF-8",
+				"line_ending": "Windows",
+				"name": "import React, { Component} from 'react';"
+			}
+		},
+		{
+			"file": "components/SocialCard.js",
+			"settings":
+			{
+				"buffer_size": 1083,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"contents": "from bs4 import BeautifulSoup\nfrom flask import Flask, jsonify\nfrom flask_cors import CORS\nimport requests\napp=Flask(__name__)\nCORS(app)\n@app.route('/return_tweets')\ndef _return_tweets():\n\ttweetlist=[]\n\tresult= requests.get(\"https://twitter.com/FortniteGame\")\n\tc= result.content\n\tsoup= BeautifulSoup(c)\n\t",
-			"file": "python/server.py",
-			"file_size": 269,
-			"file_write_time": 132101952581866389,
+			"file": "components/PantryCard.js",
 			"settings":
 			{
-				"buffer_size": 304,
+				"buffer_size": 1417,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "python/server.py",
+			"settings":
+			{
+				"buffer_size": 828,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -200,25 +235,6 @@
 				"buffer_size": 680,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "components/PantryCard.js",
-			"settings":
-			{
-				"buffer_size": 1417,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "SocialScreen.js",
-			"settings":
-			{
-				"buffer_size": 183,
-				"encoding": "UTF-8",
-				"line_ending": "Windows",
-				"name": "import React, { Component} from 'react';"
 			}
 		}
 	],
@@ -303,12 +319,19 @@
 	"expanded_folders":
 	[
 		"/D/Programming Projects/PantryFinder",
+		"/D/Programming Projects/PantryFinder/.expo",
 		"/D/Programming Projects/PantryFinder/assets",
 		"/D/Programming Projects/PantryFinder/components",
-		"/D/Programming Projects/PantryFinder/config"
+		"/D/Programming Projects/PantryFinder/config",
+		"/D/Programming Projects/PantryFinder/node_modules",
+		"/D/Programming Projects/PantryFinder/node_modules/react-native",
+		"/D/Programming Projects/PantryFinder/python"
 	],
 	"file_history":
 	[
+		"/D/Programming Projects/PantryFinder/components/PantryCard.js",
+		"/D/Programming Projects/PantryFinder/TODO.md",
+		"/D/Programming Projects/PantryFinder/python/server.py",
 		"/D/Programming Projects/PantryFinder/config/config.js",
 		"/D/Programming Projects/RealtimeMazeGame/server.py",
 		"/D/Programming Projects/RealtimeMazeGame/static/index.js",
@@ -319,7 +342,6 @@
 		"/D/Programming Projects/PantryFinder/App.js",
 		"/C/Users/fufu/AppData/Roaming/Sublime Text 3/Packages/User/Emmet.sublime-settings",
 		"/D/Programming Projects/PantryFinder/pantryfinder.sublime-project",
-		"/D/Programming Projects/PantryFinder/components/PantryCard.js",
 		"/D/Programming Projects/RealtimeMazeGame/gamelogic.py",
 		"/D/Programming Projects/RealtimeMazeGame/index.js",
 		"/D/Programming Projects/RealtimeMazeGame/style.css",
@@ -332,7 +354,7 @@
 	],
 	"find":
 	{
-		"height": 32.0
+		"height": 29.0
 	},
 	"find_in_files":
 	{
@@ -411,62 +433,63 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "HomeScreen.js",
+					"file": "SocialScreen.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2619,
+						"buffer_size": 1096,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1100,
-								1100
+								948,
+								948
+							]
+						],
+						"settings":
+						{
+							"auto_name": "import React, { Component} from 'react';",
+							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 11.0,
+						"translation.y": 300.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "components/SocialCard.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1083,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								417,
+								417
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 660.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "python/server.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 304,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								304,
-								304
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 7.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -474,6 +497,64 @@
 				},
 				{
 					"buffer": 3,
+					"file": "components/PantryCard.js",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 1417,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								582,
+								665
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "python/server.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 828,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								828
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
 					"file": "PantryScreen.js",
 					"semi_transient": false,
 					"settings":
@@ -497,65 +578,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "components/PantryCard.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1417,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								351,
-								351
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "SocialScreen.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 183,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								130,
-								130
-							]
-						],
-						"settings":
-						{
-							"auto_name": "import React, { Component} from 'react';",
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
+					"stack_index": 4,
 					"type": "text"
 				}
 			]
@@ -563,11 +586,11 @@
 	],
 	"incremental_find":
 	{
-		"height": 32.0
+		"height": 29.0
 	},
 	"input":
 	{
-		"height": 40.0
+		"height": 42.0
 	},
 	"layout":
 	{
@@ -604,7 +627,7 @@
 	"project": "pantryfinder.sublime-project",
 	"replace":
 	{
-		"height": 60.0
+		"height": 54.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -613,6 +636,10 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"",
+				"PantryFinder\\SocialScreen.js"
+			]
 		],
 		"width": 0.0
 	},
