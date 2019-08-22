@@ -7,9 +7,10 @@ import { createStackNavigator, createBottomTabNavigator, createAppContainer } fr
 import HomeScreen from './HomeScreen'
 import SocialScreen from './SocialScreen'
 import PantryScreen from './PantryScreen'
-import { Permissions, Notifications } from 'expo'
+import { Notifications } from 'expo'
+import * as Permissions from 'expo-permissions'
 // Push notifcations
-const PUSH_ENDPOINT="http://localhost:5000/push_token"
+const PUSH_ENDPOINT="https://fredfoodbank.pythonanywhere.com/push_token"
 
 async function registerForPushNotifications()
 {
@@ -29,7 +30,7 @@ async function registerForPushNotifications()
     }
 
     let token = await Notifications.getExpoPushTokenAsync();
-
+    console.log(token)
     return fetch(PUSH_ENDPOINT,{
         method:'POST',
         headers:{
@@ -43,9 +44,11 @@ async function registerForPushNotifications()
             user:{
                 username: 'Brent',
             },
-        });
+        }),
     });
+    console.log("function called")
 }
+registerForPushNotifications();
 // Navigation
 const HomeStack = createStackNavigator({
     Home: { screen: HomeScreen },

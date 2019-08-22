@@ -1,9 +1,10 @@
 from bs4 import BeautifulSoup
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 import requests
 app=Flask(__name__)
 CORS(app)
+tokenList=[]
 @app.route('/return_tweets')
 def _return_tweets():
 	tweetlist=[]
@@ -20,5 +21,13 @@ def _return_tweets():
 		tweetDate=tweetDate["title"]
 		tweetlist.append({'tweet':tweetContent[0],'pic':tweetPicture,'date':tweetDate,'key':tweet['data-item-id']})
 	return jsonify(result=tweetlist)
+@app.route('/push_token', methods=['POST'])
+def _add_new_token():
+	req_data=request.get_json()
+	token = req_data['token']['value']
+	global tokenList
+	tokenList.append(token)
+	print(tokenList[-1])
+	return "test"
 if __name__=="__main__":
 	app.run()
