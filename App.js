@@ -41,7 +41,6 @@ async function registerForPushNotifications()
             token:{
                 value:token,
             },
-            
         }),
     });
     console.log("function called")

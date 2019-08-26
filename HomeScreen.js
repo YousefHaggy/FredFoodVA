@@ -6,6 +6,7 @@ import config from './config/config'
 export default class HomeScreen extends Component {
     async getPantries() {
         try {
+            this.setState({ isRefreshing: true })
             let response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${config.sheets.spreadsheetId}/values/A2:E?key=${config.sheets.apiKey}`);
             let responseJson = await response.json();
             let areaList = new Array();
@@ -18,20 +19,20 @@ export default class HomeScreen extends Component {
                 pantryList[value[0]].push(value)
             });
             this.setState({ pantryList: pantryList, areaList: areaList });
+            this.setState({ isRefreshing: false });
             _storeData = async () => {
                 try {
                     await AsyncStorage.setItem("pantryList", pantryList)
                     await AsyncStorage.setItem("areaList", areaList)
-                } catch (error) {
-                }
+                } catch (error) {}
             }
         } catch (error) {
-            _retrieveData = async ()=>{
-                const pantryList=await AsyncStorage.getItem("pantryList")
-                const areaList= await AsyncStorage.getItem("areaList")
-                if (pantryList != null&& areaList!=null)
-                {
+            _retrieveData = async () => {
+                const pantryList = await AsyncStorage.getItem("pantryList")
+                const areaList = await AsyncStorage.getItem("areaList")
+                if (pantryList != null && areaList != null) {
                     this.setState({ pantryList: pantryList, areaList: areaList });
+                    this.setState({ isRefreshing: false })
                 }
             }
         }
@@ -44,15 +45,19 @@ export default class HomeScreen extends Component {
         super();
         this.state = {
             pantryList: [],
+            isRefreshing: true
         }
     }
+
     render() {
         console.log(this.state.pantryList)
         return (
             <View style={styles.container}>
             <FlatList data={this.state.areaList} 
             renderItem={({item})=><LocationCard areaName={item} navigation={this.props.navigation} pantryList={this.state.pantryList[`${item}`]}></LocationCard>}
-            ListEmptyComponent={<Text style={{fontSize:20, fontWeight:'bold', textAlign:'center', textAlignVertical: "center"}}>Loading pantries</Text>}></FlatList>
+            ListEmptyComponent={<Text style={{fontSize:20, fontWeight:'bold', textAlign:'center', textAlignVertical: "center"}}>Loading pantries</Text>}
+            refreshing={this.state.isRefreshing}
+            onRefresh={()=>this.getPantries()}></FlatList>
       
     </View>
         );

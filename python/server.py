@@ -75,8 +75,6 @@ def _add_new_token():
 	token = req_data['token']['value']
 	global tokenList
 	tokenList.append(token)
-	send_push_message(token,'test')
-	print(tokenList[-1])
-	return "test"
+	return "Subscribed"
 if __name__=="__main__":
 	app.run()
