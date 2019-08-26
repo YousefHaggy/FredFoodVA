@@ -4,7 +4,6 @@ import PantryCard from "./components/PantryCard"
 import LocationCard from "./components/LocationCard"
 import config from './config/config'
 import { Notifications } from 'expo'
-import { registerForPushNotifications } from './App'
 export default class HomeScreen extends Component {
     async getPantries() {
         try {
@@ -40,7 +39,6 @@ export default class HomeScreen extends Component {
         }
     }
     componentDidMount() {
-        registerForPushNotifications();
         this.getPantries()
         console.log(this.state.pantryList)
     }

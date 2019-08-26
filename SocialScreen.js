@@ -5,7 +5,7 @@ export default class SocialScreen extends Component {
     async getTweets() {
         try {
             this.setState({ isRefreshing: true })
-            let response = await fetch('http://fredfoodbank.pythonanywhere.com/return_tweets');
+            let response = await fetch('http://fredfoodbank.herokuapp.com/return_tweets');
             let responseJson = await response.json();
             let tweets = responseJson.result;
             this.setState({
