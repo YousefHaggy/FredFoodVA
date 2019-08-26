@@ -12,7 +12,7 @@ import * as Permissions from 'expo-permissions'
 // Push notifcations
 const PUSH_ENDPOINT="https://fredfoodbank.pythonanywhere.com/push_token"
 
-async function registerForPushNotifications()
+ async function registerForPushNotifications()
 {
     const { status : existingStatus}= await Permissions.getAsync(
         Permissions.NOTIFICATIONS
@@ -45,7 +45,7 @@ async function registerForPushNotifications()
     });
     console.log("function called")
 }
-registerForPushNotifications();
+registerForPushNotifications()
 // Navigation
 const HomeStack = createStackNavigator({
     Home: { screen: HomeScreen },
