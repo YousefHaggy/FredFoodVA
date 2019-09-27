@@ -204,20 +204,17 @@
 			"file": "SocialScreen.js",
 			"settings":
 			{
-				"buffer_size": 1536,
+				"buffer_size": 1531,
 				"encoding": "UTF-8",
 				"line_ending": "Windows",
 				"name": "import React, { Component} from 'react';"
 			}
 		},
 		{
-			"contents": "from bs4 import BeautifulSoup\nfrom flask import Flask, jsonify, request\nfrom flask_cors import CORS\nfrom exponent_server_sdk import DeviceNotRegisteredError\nfrom exponent_server_sdk import PushClient\nfrom exponent_server_sdk import PushMessage\nfrom exponent_server_sdk import PushResponseError\nfrom exponent_server_sdk import PushServerError\nfrom requests.exceptions import ConnectionError\nfrom requests.exceptions import HTTPError\nimport requests\nfrom apscheduler.schedulers.background import BackgroundScheduler\nimport sched, time\napp=Flask(__name__)\nCORS(app)\ntokenList={}\nsavedUpdates={}\ndef send_push_message(token,message,extra=None):\n\ttry:\n\t\tresponse=PushClient().publish(PushMessage(to=token,body=message,data=extra))\n\texcept PushServerError as exc:\n\t\trollbar.report_exec_info(\n\t\t\textra_data={\n\t\t\t\t'token': token,\n\t\t\t\t'message': message,\n\t\t\t\t'extra': extra,\n\t\t\t\t'errors': exc.errors,\n\t\t\t\t'response_data': exc.response_data,\n\t\t\t})\n\t\traise\n\texcept (ConnectionError, HTTPError) as exc:\n        # Encountered some Connection or HTTP error - retry a few times in\n        # case it is transient.\n\t\trollbar.report_exc_info(\n\t\textra_data={'token': token, 'message': message, 'extra': extra})\n\t\traise self.retry(exc=exc)\n\n\ttry:\n        # We got a response back, but we don't know whether it's an error yet.\n        # This call raises errors so we can handle them with normal exception\n        # flows.\n\t\tresponse.validate_response()\n\texcept DeviceNotRegisteredError:\n        # Mark the push token as inactive\n\t\tfrom notifications.models import PushToken\n\t\tPushToken.objects.filter(token=token).update(active=False)\n\texcept PushResponseError as exc:\n        # Encountered some other per-notification error.\n\t\trollbar.report_exc_info(\n            extra_data={\n                'token': token,\n                'message': message,\n                'extra': extra,\n                'push_response': exc.push_response._asdict(),\n            })\n\t\traise self.retry(exc=exc)\ndef returnTweets():\n\ttweetlist=[]\n\tresult= requests.get(\"http://twitter.com/fredfoodva\")\n\tc= result.content\n\tsoup= BeautifulSoup(c,'lxml')\n\ttweetsMainDiv= soup.find_all('div',class_=\"tweet\")\n\tfor tweet in tweetsMainDiv:\n\t\ttweetContent=tweet.find('p', class_='tweet-text').text.split('pic.twitter.com')\n\t\ttweetPicture=None\n\t\tif len(tweetContent)==2:\n\t\t\ttweetPicture=tweet.find_all(\"img\")[1]['src']\n\t\ttweetDate=tweet.find('a',class_=\"tweet-timestamp\")\n\t\ttweetDate=tweetDate[\"title\"]\n\t\ttweetlist.append({'tweet':tweetContent[0],'pic':tweetPicture,'date':tweetDate,'key':tweet['data-item-id']})\n\treturn tweetlist\ndef checkForPantryUpdates():\n\ttweetList=returnTweets();\n\tfor tweet in tweetList:\n\t\tif tweet['key'] not in savedUpdates and \"Pantry Update\" in tweet['tweet']:\n\t\t\tsavedUpdates.add(tweet['key'])\n\t\t\tfor token in tokenList:\n\t\t\t\tsend_push_message(tweet['tweet'],token)\nscheduler= BackgroundScheduler()\nscheduler.add_job(func=checkForPantryUpdates, trigger=\"interval\", seconds=30)\nscheduler.start()\n@app.route('/return_tweets')\ndef _return_tweets():\n\treturn jsonify(result=returnTweets())\n@app.route('/push_token', methods=['POST'])\ndef _add_new_token():\n\treq_data=request.get_json()\n\ttoken = req_data['token']['value']\n\tglobal tokenList\n\ttokenList.add(token)\n\treturn \"Subscribed\"\nif __name__==\"__main__\":\n\tapp.run()",
 			"file": "/D/Programming Projects/PantryFinderServer/server.py",
-			"file_size": 3374,
-			"file_write_time": 132113015699717030,
 			"settings":
 			{
-				"buffer_size": 3280,
+				"buffer_size": 3308,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -352,22 +349,26 @@
 		"/D/Programming Projects/PantryFinder/.expo",
 		"/D/Programming Projects/PantryFinder/assets",
 		"/D/Programming Projects/PantryFinder/components",
-		"/D/Programming Projects/PantryFinder/config"
+		"/D/Programming Projects/PantryFinder/config",
+		"/D/Programming Projects/RealtimeMazeGame",
+		"/D/Programming Projects/RealtimeMazeGame/static",
+		"/D/Programming Projects/RealtimeMazeGame/templates"
 	],
 	"file_history":
 	[
+		"/D/Programming Projects/RealtimeMazeGame/templates/index.html",
+		"/D/Programming Projects/RealtimeMazeGame/server.py",
+		"/D/Programming Projects/PantryFinderServer/server.py",
 		"/D/Programming Projects/PantryFinderServer/Procfile",
 		"/D/Programming Projects/PantryFinder/app.json",
 		"/D/Programming Projects/PantryFinder/components/PantryCard.js",
 		"/D/Programming Projects/PantryFinder/TODO.md",
 		"/D/Programming Projects/PantryFinder/python/server.py",
 		"/D/Programming Projects/PantryFinder/config/config.js",
-		"/D/Programming Projects/RealtimeMazeGame/server.py",
 		"/D/Programming Projects/RealtimeMazeGame/static/index.js",
 		"/D/Programming Projects/PantryFinder/node_modules/@babel/parser/CHANGELOG.md",
 		"/C/Users/fufu/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
 		"/D/Programming Projects/RealtimeMazeGame/templates/details.html",
-		"/D/Programming Projects/RealtimeMazeGame/templates/index.html",
 		"/D/Programming Projects/PantryFinder/App.js",
 		"/C/Users/fufu/AppData/Roaming/Sublime Text 3/Packages/User/Emmet.sublime-settings",
 		"/D/Programming Projects/PantryFinder/pantryfinder.sublime-project",
@@ -432,7 +433,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 5,
 			"sheets":
 			[
 				{
@@ -462,7 +463,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 7,
 					"type": "text"
 				},
 				{
@@ -471,15 +472,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1536,
+						"buffer_size": 1531,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								578,
-								578
+								825,
+								825
 							]
 						],
 						"settings":
@@ -493,7 +494,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -502,26 +503,27 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3280,
+						"buffer_size": 3308,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3280,
-								3280
+								2201,
+								2201
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Python/Python.sublime-syntax"
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1650.0,
+						"translation.y": 1254.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
@@ -548,10 +550,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 330.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
@@ -581,7 +583,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -611,7 +613,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -641,7 +643,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
@@ -671,7 +673,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 6,
 					"type": "text"
 				}
 			]
