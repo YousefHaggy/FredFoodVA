@@ -4,6 +4,7 @@ import PantryCard from "./components/PantryCard"
 import LocationCard from "./components/LocationCard"
 import config from './config/config'
 import { Notifications } from 'expo'
+import { Searchbar } from "react-native-paper"
 import Constants from "expo-constants"
 import * as Permissions from 'expo-permissions'
 import * as Location from "expo-location"
@@ -16,7 +17,7 @@ export default class HomeScreen extends Component {
             let areaList = new Array();
             let pantryList = new Object();
             responseJson.values.forEach((value, index) => {
-                if(index==0){
+                if (index == 0) {
                     return;
                 }
                 if (!areaList.includes(value[2])) {
@@ -25,7 +26,9 @@ export default class HomeScreen extends Component {
                 }
                 pantryList[value[2]].push(value)
             });
-            this.setState({ pantryList: pantryList, areaList: areaList });
+            areaList.sort();
+            const filter = this.state.filter;
+            this.setState({ pantryList: pantryList, areaList: areaList, filteredAreaList: areaList.filter((area) => { return area.includes(filter) }) });
             this.setState({ isRefreshing: false });
             _storeData = async () => {
                 try {
@@ -55,14 +58,17 @@ export default class HomeScreen extends Component {
             }
         }
     }
-   /* async getLocationAsync() {
-        let { status } = await Permissions.askAsync(Permissions.LOCATION);
-        if (status === "granted") {
-            let location = await Location.getCurrentPositionAsync({});
-            location= await Location.reverseGeocodeAsync(location);
-            this.setState({ location });
-        }
-    }*/
+    /* async getLocationAsync() {
+         let { status } = await Permissions.askAsync(Permissions.LOCATION);
+         if (status === "granted") {
+             let location = await Location.getCurrentPositionAsync({});
+             location= await Location.reverseGeocodeAsync(location);
+             this.setState({ location });
+         }
+     }*/
+    filterList() {
+
+    }
     componentDidMount() {
         this.getPantries()
         console.log(this.state.pantryList)
@@ -72,9 +78,11 @@ export default class HomeScreen extends Component {
         this.state = {
             notification: {},
             pantryList: [],
+            filteredAreaList: [],
+            filter:'',
             location: null,
             nearestPantry: null,
-            isRefreshing: true
+            isRefreshing: true,
         }
     }
 
@@ -82,10 +90,14 @@ export default class HomeScreen extends Component {
         console.log(this.state.pantryList)
         return (
             <View style={styles.container}>
-           {/*<Text style={{fontSize:20, fontWeight:'bold'}}> Nearest Pantry</Text>
+            <Searchbar placeholder="Search for a locality" onChangeText={query => { 
+                                  this.setState({filter:query,filteredAreaList: this.state.areaList.filter((area)=>{return area.includes(query)})});
+    
+ }} style={{ margin:5}} value={this.state.searchQuery} />
+           {/*<Text style={{fontSize:20, fontWeight:'bold'}}> Nearest Pantry</Text>\
             {this.props.nearestPantry!=null ? (<Text>dur</Text>): (<ActivityIndicator size="large" color="#F59300" />)}
             <Text style={{fontSize:20, fontWeight:'bold'}}> More pantries: </Text>*/}
-            <FlatList data={this.state.areaList} 
+            <FlatList data={this.state.filteredAreaList} 
             renderItem={({item})=><LocationCard areaName={item} navigation={this.props.navigation} pantryList={this.state.pantryList[`${item}`]}></LocationCard>}
             ListEmptyComponent={<Text style={{fontSize:20, fontWeight:'bold', textAlign:'center', textAlignVertical: "center"}}>Loading pantries</Text>}
             refreshing={this.state.isRefreshing}
