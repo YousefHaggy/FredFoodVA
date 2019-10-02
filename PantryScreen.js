@@ -8,10 +8,10 @@ export default class PantryScreen extends Component {
         };
     }
     render() {
-        let pantryList = this.props.navigation.getParam('pantryList', '');
+        let pantryList = this.props.navigation.getParam('pantryList', '').sort();
         console.log("LIST" + pantryList)
         return (
-            <FlatList data={this.props.navigation.getParam('pantryList','')} 
+            <FlatList data={this.props.navigation.getParam('pantryList','').sort(function(a,b){return (a['name']>b['name']? 1:-1)})} 
             renderItem={({item})=><PantryCard pantry={item} ></PantryCard>}
          ></FlatList>
         );

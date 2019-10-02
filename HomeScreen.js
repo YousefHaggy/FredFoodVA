@@ -41,15 +41,15 @@
                   pantryDict['address'] = value[1] + ", " + value[2] + ", VA " + value[4];
                   pantryDict['name'] = value[0];
                   pantryDict['phone'] = this.formatPhoneNumber(value[7]);
-                  pantryDict['notes'] = value[6];
+                  pantryDict['notes'] = value[8];
                   pantryDict['hours'] = {
                       'Monday': { 'hours': value[9], 'frequency': value[10] },
-                      'Tuesday': { 'hours': value[9], 'frequency': value[10] },
-                      'Wednesday': { 'hours': value[11], 'frequency': value[12] },
-                      'Thursday': { 'hours': value[13], 'frequency': value[14] },
-                      'Friday': { 'hours': value[15], 'frequency': value[16] },
-                      'Saturday': { 'hours': value[17], 'frequency': value[18] },
-                      'Sunday': { 'hours': value[19], 'frequency': value[20] },
+                      'Tuesday': { 'hours': value[11], 'frequency': value[12] },
+                      'Wednesday': { 'hours': value[13], 'frequency': value[14] },
+                      'Thursday': { 'hours': value[15], 'frequency': value[16] },
+                      'Friday': { 'hours': value[17], 'frequency': value[18] },
+                      'Saturday': { 'hours': value[19], 'frequency': value[20] },
+                      'Sunday': { 'hours': value[21], 'frequency': value[22] },
 
                   };
                   pantryDict['services'] = {
