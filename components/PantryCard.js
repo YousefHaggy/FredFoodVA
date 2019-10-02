@@ -12,14 +12,21 @@ export default class PantryCard extends Component {
         }
     }
     render() {
+        var hours=this.props.pantry['hours'];
         return (
             <View style={styles.card}>
 			<Text style={{fontSize:20, fontWeight:'bold'}}> {this.props.pantry['name']} </Text>
-			<Text>{this.props.pantry['phone']}</Text>
-			<Text>{this.props.pantry['address']}</Text>
-            <Text style={{fontSize:15, fontWeight:'bold'}}> Hours: </Text>
-			<Text>{this.props.pantry['address']}</Text>
-            <Text style={{fontSize:15, fontWeight:'bold'}}> Hours: </Text>
+			<Text  style={{fontSize:15}}>{this.props.pantry['address']}</Text>
+            <Text style={{fontSize:15}}>Phone: {this.props.pantry['phone']}</Text>
+            <Text style={{fontSize:15}}>Hours: </Text>
+            {
+                Object.keys(hours).map(function(key,index){
+                    if(hours[key]['hours']!=""){
+                       return (<Text>{key}: {hours[key]['hours']}</Text>)
+                    }
+                })
+            }
+            <Text style={{fontSize:18, fontWeight:'bold'}}> Services: </Text>
 
 			<Button small style={{justifyContent:'center', marginTop:10, backgroundColor:'#F59300'}} onPress={()=>this._getDirections(this.props.pantryAddress)}><Text style={{fontSize:20, fontWeight:'bold', color:'white'}}>Get Directions</Text></Button>
 			</View>
@@ -35,6 +42,8 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
         borderRadius: 3,
         margin: 5,
+        fontSize:20,
+        textAlign:'left',
         backgroundColor: '#FFF',
         ...Platform.select({
             ios: {
