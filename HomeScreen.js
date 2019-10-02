@@ -1,95 +1,132 @@
-import React, { Component } from 'react';
-import { ActivityIndicator, AsyncStorage, Platform, StyleSheet, Text, View, FlatList, StatusBar } from 'react-native';
-import PantryCard from "./components/PantryCard"
-import LocationCard from "./components/LocationCard"
-import config from './config/config'
-import { Notifications } from 'expo'
-import { Searchbar } from "react-native-paper"
-import Constants from "expo-constants"
-import * as Permissions from 'expo-permissions'
-import * as Location from "expo-location"
-export default class HomeScreen extends Component {
-    async getPantries() {
-        try {
-            this.setState({ isRefreshing: true })
-            let response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${config.sheets.spreadsheetId}/values/A2:X?key=${config.sheets.apiKey}`);
-            let responseJson = await response.json();
-            let areaList = new Array();
-            let pantryList = new Object();
-            responseJson.values.forEach((value, index) => {
-                if (index == 0) {
-                    return;
-                }
-                if (!areaList.includes(value[2])) {
-                    areaList.push(value[2])
-                    pantryList[value[2]] = new Array();
-                }
-                pantryList[value[2]].push(value)
-            });
-            areaList.sort();
-            const filter = this.state.filter;
-            this.setState({ pantryList: pantryList, areaList: areaList, filteredAreaList: areaList.filter((area) => { return area.includes(filter) }) });
-            this.setState({ isRefreshing: false });
-            _storeData = async () => {
-                try {
-                    await AsyncStorage.setItem("pantryList", pantryList)
-                    await AsyncStorage.setItem("areaList", areaList)
-                } catch (error) {}
-            }
-            /*await this.getLocationAsync();
-            if (this.state.location != null) {console.log(this.state.location);
-                locationDetails=responseJson;
-                locationDetails["location"]=this.state.location;
-                response = await fetch('https://fredfoodbank.herokuapp.com/getNearestPantry', {
-                    method: 'GET',
-                    body: JSON.stringify(locationDetails)
-                });
-                responseJson = await response.json();
-                this.setState({ nearestPantry: responseJson });
-            }*/
-        } catch (error) {
-            _retrieveData = async () => {
-                const pantryList = await AsyncStorage.getItem("pantryList")
-                const areaList = await AsyncStorage.getItem("areaList")
-                if (pantryList != null && areaList != null) {
-                    this.setState({ pantryList: pantryList, areaList: areaList });
-                    this.setState({ isRefreshing: false })
-                }
-            }
-        }
-    }
-    /* async getLocationAsync() {
-         let { status } = await Permissions.askAsync(Permissions.LOCATION);
-         if (status === "granted") {
-             let location = await Location.getCurrentPositionAsync({});
-             location= await Location.reverseGeocodeAsync(location);
-             this.setState({ location });
-         }
-     }*/
-    filterList() {
+  import React, { Component } from 'react';
+  import { ActivityIndicator, AsyncStorage, Platform, StyleSheet, Text, View, FlatList, StatusBar } from 'react-native';
+  import PantryCard from "./components/PantryCard"
+  import LocationCard from "./components/LocationCard"
+  import config from './config/config'
+  import { Notifications } from 'expo'
+  import { Searchbar } from "react-native-paper"
+  import Constants from "expo-constants"
+  import * as Permissions from 'expo-permissions'
+  import * as Location from "expo-location"
+  export default class HomeScreen extends Component {
+       formatPhoneNumber(phoneNumberString) {
+          var cleaned = ('' + phoneNumberString).replace(/\D/g, '')
+          var match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/)
+          if (match) {
+              return '(' + match[1] + ') ' + match[2] + '-' + match[3]
+          }
+          return null
+      }
+      async getPantries() {
+          try {
+              this.setState({ isRefreshing: true })
+              let response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${config.sheets.spreadsheetId}/values/A2:AD?key=${config.sheets.apiKey}`);
+              let responseJson = await response.json();
+              let areaList = new Array();
+              let pantryList = new Object();
+              let maxLength = responseJson.values.sort(function(a, b) { return b.length - a.length })[0].length;
+              responseJson.values.forEach((value, index) => {
+                  if (index == 0) {
+                      return;
+                  }
+                  if (!areaList.includes(value[2])) {
+                      areaList.push(value[2])
+                      pantryList[value[2]] = new Array();
+                  }
+                  for (var i = 0; i < (maxLength - value.length) + 1; i++) {
+                      value.push("");
+                  }
+                  pantryDict = {};
 
-    }
-    componentDidMount() {
-        this.getPantries()
-        console.log(this.state.pantryList)
-    }
-    constructor() {
-        super();
-        this.state = {
-            notification: {},
-            pantryList: [],
-            filteredAreaList: [],
-            filter:'',
-            location: null,
-            nearestPantry: null,
-            isRefreshing: true,
-        }
-    }
+                  pantryDict['address'] = value[1] + ", " + value[2] + ", VA " + value[4];
+                  pantryDict['name'] = value[0];
+                  pantryDict['phone'] = this.formatPhoneNumber(value[7]);
+                  pantryDict['notes'] = value[6];
+                  pantryDict['hours'] = {
+                      'Monday': { 'hours': value[9], 'frequency': value[10] },
+                      'Tuesday': { 'hours': value[9], 'frequency': value[10] },
+                      'Wednesday': { 'hours': value[11], 'frequency': value[12] },
+                      'Thursday': { 'hours': value[13], 'frequency': value[14] },
+                      'Friday': { 'hours': value[15], 'frequency': value[16] },
+                      'Saturday': { 'hours': value[17], 'frequency': value[18] },
+                      'Sunday': { 'hours': value[19], 'frequency': value[20] },
 
-    render() {
-        console.log(this.state.pantryList)
-        return (
-            <View style={styles.container}>
+                  };
+                  pantryDict['services'] = {
+                      'On-Site Pantry': value[21],
+                      'TEFAP Pantry': value[22],
+                      'CSFP Site': value[23],
+                      'Food For Life Site': value[24],
+                      'Summer Feeding Site': value[25]
+                  };
+                  pantryList[value[2]].push(pantryDict);
+
+
+              });
+              areaList.sort();
+              const filter = this.state.filter;
+              this.setState({ pantryList: pantryList, areaList: areaList, filteredAreaList: areaList.filter((area) => { return area.includes(filter) }) });
+              this.setState({ isRefreshing: false });
+              _storeData = async () => {
+                  try {
+                      await AsyncStorage.setItem("pantryList", pantryList)
+                      await AsyncStorage.setItem("areaList", areaList)
+                  } catch (error) {}
+              }
+              /*await this.getLocationAsync();
+              if (this.state.location != null) {console.log(this.state.location);
+                  locationDetails=responseJson;
+                  locationDetails["location"]=this.state.location;
+                  response = await fetch('https://fredfoodbank.herokuapp.com/getNearestPantry', {
+                      method: 'GET',
+                      body: JSON.stringify(locationDetails)
+                  });
+                  responseJson = await response.json();
+                  this.setState({ nearestPantry: responseJson });
+              }*/
+          } catch (error) {
+              _retrieveData = async () => {
+                  const pantryList = await AsyncStorage.getItem("pantryList")
+                  const areaList = await AsyncStorage.getItem("areaList")
+                  if (pantryList != null && areaList != null) {
+                      this.setState({ pantryList: pantryList, areaList: areaList });
+                      this.setState({ isRefreshing: false })
+                  }
+              }
+          }
+      }
+      /* async getLocationAsync() {
+           let { status } = await Permissions.askAsync(Permissions.LOCATION);
+           if (status === "granted") {
+               let location = await Location.getCurrentPositionAsync({});
+               location= await Location.reverseGeocodeAsync(location);
+               this.setState({ location });
+           }
+       }*/
+      filterList() {
+
+      }
+      componentDidMount() {
+          this.getPantries()
+          console.log(this.state.pantryList)
+      }
+      constructor() {
+          super();
+          this.state = {
+              notification: {},
+              pantryList: [],
+              filteredAreaList: [],
+              filter: '',
+              location: null,
+              nearestPantry: null,
+              isRefreshing: true,
+          }
+      }
+
+      render() {
+          console.log(this.state.pantryList)
+          return (
+              <View style={styles.container}>
             <Searchbar placeholder="Search for a locality" onChangeText={query => { 
                                   this.setState({filter:query,filteredAreaList: this.state.areaList.filter((area)=>{return area.includes(query)})});
     
@@ -104,13 +141,13 @@ export default class HomeScreen extends Component {
             onRefresh={()=>this.getPantries()}></FlatList>
       
     </View>
-        );
-    }
-}
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#eeeeee',
-        justifyContent: 'flex-start',
-    },
-});
+          );
+      }
+  }
+  const styles = StyleSheet.create({
+      container: {
+          flex: 1,
+          backgroundColor: '#eeeeee',
+          justifyContent: 'flex-start',
+      },
+  });

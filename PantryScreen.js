@@ -12,7 +12,7 @@ export default class PantryScreen extends Component {
         console.log("LIST" + pantryList)
         return (
             <FlatList data={this.props.navigation.getParam('pantryList','')} 
-            renderItem={({item})=><PantryCard pantryName={item[1]} pantryAddress={item[2]} pantryHours={item[3]} pantryPhone={item[4]}></PantryCard>}
+            renderItem={({item})=><PantryCard pantry={item} ></PantryCard>}
          ></FlatList>
         );
     }

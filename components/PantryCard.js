@@ -14,10 +14,13 @@ export default class PantryCard extends Component {
     render() {
         return (
             <View style={styles.card}>
-			<Text style={{fontSize:20, fontWeight:'bold'}}> {this.props.pantryName} </Text>
-			<Text>{this.props.pantryPhone}</Text>
-			<Text>{this.props.pantryAddress}</Text>
-			<Text>{this.props.pantryHours}</Text>
+			<Text style={{fontSize:20, fontWeight:'bold'}}> {this.props.pantry['name']} </Text>
+			<Text>{this.props.pantry['phone']}</Text>
+			<Text>{this.props.pantry['address']}</Text>
+            <Text style={{fontSize:15, fontWeight:'bold'}}> Hours: </Text>
+			<Text>{this.props.pantry['address']}</Text>
+            <Text style={{fontSize:15, fontWeight:'bold'}}> Hours: </Text>
+
 			<Button small style={{justifyContent:'center', marginTop:10, backgroundColor:'#F59300'}} onPress={()=>this._getDirections(this.props.pantryAddress)}><Text style={{fontSize:20, fontWeight:'bold', color:'white'}}>Get Directions</Text></Button>
 			</View>
         );
