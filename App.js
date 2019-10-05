@@ -28,7 +28,15 @@ const PUSH_ENDPOINT="https://fredfoodbank.herokuapp.com/push_token"
     if(finalStatus!=="granted"){
         return;
     }
-
+    if (Platform.OS === 'android') {
+     Notifications.createChannelAndroidAsync('pantry-updates', {
+    name: 'Pantry Updates',
+    sound: true,
+    priority:'high',
+    vibrate:true
+  });
+}
+ 
     let token = await Notifications.getExpoPushTokenAsync();
     console.log(token)
     return fetch(PUSH_ENDPOINT,{

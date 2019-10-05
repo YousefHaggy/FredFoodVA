@@ -108,6 +108,14 @@
       }
       componentDidMount() {
           this.getPantries()
+          if (Platform.OS === 'android') {
+     Notifications.createChannelAndroidAsync('pantry-updates', {
+    name: 'Pantry Updates',
+    sound: true,
+    priority:'high',
+    vibrate:true
+  });
+}
           console.log(this.state.pantryList)
       }
       constructor() {

@@ -52,7 +52,7 @@ export default class PantryCard extends Component {
                 )
              :
              null }
-            <Button small style={{justifyContent:'center', marginTop:10, backgroundColor:'#F59300'}} onPress={()=>this._getDirections(this.props.pantry['address'])}><Text style={{fontSize:20, fontWeight:'bold', color:'white'}}>Get Directions</Text></Button>
+            <Button small style={{justifyContent:'center', marginTop:10, backgroundColor:'#F59300'}} onPress={()=>this._getDirections(this.props.pantry['address'])}><Text style={{fontSize:17, fontWeight:'bold', color:'white'}}>Get Directions</Text></Button>
             </View>
         );
     }

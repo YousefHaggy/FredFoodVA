@@ -15,7 +15,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#f79604"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -26,8 +26,9 @@
     "ios": {
       "supportsTablet": true
     },
-    "android":{
-      "package":"com.yousefhaggy.fredfoodva"
-    }
+    "android": {
+      "package": "com.yousefhaggy.fredfoodva"
+    },
+    "description": ""
   }
 }
