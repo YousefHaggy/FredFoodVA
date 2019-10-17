@@ -24,7 +24,7 @@ export default class PantryCard extends Component {
             <Text style={{fontSize:15}}>Phone: <Text style={{color:'blue'}} onPress={()=>Linking.openURL(`tel:${this.props.pantry['phone']}`)}>{this.props.pantry['phone']}</Text></Text>
             {
                 Object.keys(hours).map(function(key,index){
-                    if(hours[key]['hours']!=""){
+                    if(hours[key]['hours']!="" && typeof hours[key]['hours']!="undefined"){
                         if(!hasHours){
                             hasHours=true
                             return ([<Text style={{fontSize:17, fontWeight:'bold'}}>Hours of Operation: </Text>,<Text style={{fontSize:15}}>- {hours[key]['frequency']} {key}: {hours[key]['hours']}</Text>])
@@ -36,7 +36,7 @@ export default class PantryCard extends Component {
             }
              {
                 Object.keys(services).map(function(key,index){
-                    if(services[key]!=""){
+                    if(services[key]!="" && typeof services[key] !="undefined"){
                         if(!hasServices){
                                 hasServices=true;
                                  return ([<Text style={{fontSize:18, fontWeight:'bold'}}>Services: </Text>,<Text style={{fontSize:15}}>- {key}</Text>])

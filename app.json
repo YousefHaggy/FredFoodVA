@@ -9,13 +9,14 @@
       "android",
       "web"
     ],
-    "version": "1.0.0",
+    "primaryColor":"#f59300",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#f79604"
+      "backgroundColor": "#f59300"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -24,9 +25,14 @@
       "**/*"
     ],
     "ios": {
+            "icon":"./assets/iconApple.png",
+
+      "bundleIdentifier":"com.yousefhaggy.fredfoodva",
       "supportsTablet": true
     },
     "android": {
+      "versionCode":3,
+      "permissions":[],
       "package": "com.yousefhaggy.fredfoodva"
     },
     "description": ""

@@ -53,11 +53,11 @@
 
                   };
                   pantryDict['services'] = {
-                      'On-Site Pantry': value[21],
-                      'TEFAP Pantry': value[22],
-                      'CSFP Site': value[23],
-                      'Food For Life Site': value[24],
-                      'Summer Feeding Site': value[25]
+                      'On-Site Pantry': value[23],
+                      'TEFAP Pantry': value[24],
+                      'CSFP Site': value[25],
+                      'Food For Life Site': value[26],
+                      'Summer Feeding Site': value[27]
                   };
                   pantryList[value[2]].push(pantryDict);
 
