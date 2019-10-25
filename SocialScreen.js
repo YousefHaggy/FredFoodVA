@@ -5,7 +5,7 @@ export default class SocialScreen extends Component {
     async getTweets() {
         try {
             this.setState({ isRefreshing: true })
-            let response = await fetch('http://fredfoodbank.herokuapp.com/return_tweets');
+            let response = await fetch('http://fredfoodva.herokuapp.com/return_tweets');
             let responseJson = await response.json();
             let tweets = responseJson.result;
             tweets.push({'tweet':"Welcome to the Fredericksburg Regional Food Bank App! Import updates from the food bank will be posted in this tab ",'date':"11:00 AM - 24 Oct 2019",'pic':null});
