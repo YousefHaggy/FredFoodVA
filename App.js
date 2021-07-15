@@ -10,7 +10,7 @@ import PantryScreen from './PantryScreen'
 import { Notifications } from 'expo'
 import * as Permissions from 'expo-permissions'
 // Push notifcations
-const PUSH_ENDPOINT="https://fredfoodbank.herokuapp.com/push_token"
+const PUSH_ENDPOINT="https://fredfoodva.herokuapp.com/push_token"
 
  async function registerForPushNotifications()
 {
