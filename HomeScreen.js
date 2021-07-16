@@ -1,26 +1,22 @@
 import React, { Component } from "react";
 import {
-  ActivityIndicator,
   AsyncStorage,
   Platform,
   StyleSheet,
   Text,
   View,
   FlatList,
-  StatusBar,
 } from "react-native";
-import PantryCard from "./components/PantryCard";
+
+import { createStackNavigator } from "@react-navigation/stack";
 import LocationCard from "./components/LocationCard";
-import config from "./config/config";
 import { Notifications } from "expo";
 import { Searchbar } from "react-native-paper";
-import Constants from "expo-constants";
-import * as Permissions from "expo-permissions";
-import * as Location from "expo-location";
+
+import PantryScreen from "./PantryScreen";
 
 const PANTRY_ENDPOINT = "https://fredfoodva.herokuapp.com/pantry";
-
-export default class HomeScreen extends Component {
+class HomeScreen extends Component {
   formatPhoneNumber(phoneNumberString) {
     var cleaned = ("" + phoneNumberString).replace(/\D/g, "");
     var match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
@@ -128,7 +124,6 @@ export default class HomeScreen extends Component {
   }
 
   render() {
-    console.log(this.state.pantryList);
     return (
       <View style={styles.container}>
         <Searchbar
@@ -144,18 +139,17 @@ export default class HomeScreen extends Component {
           style={{ margin: 5 }}
           value={this.state.searchQuery}
         />
-        {/*<Text style={{fontSize:20, fontWeight:'bold'}}> Nearest Pantry</Text>\
-            {this.props.nearestPantry!=null ? (<Text>dur</Text>): (<ActivityIndicator size="large" color="#F59300" />)}
-            <Text style={{fontSize:20, fontWeight:'bold'}}> More pantries: </Text>*/}
         <FlatList
           data={this.state.filteredAreaList}
           renderItem={({ item }) => (
             <LocationCard
+              key={item}
               areaName={item}
               navigation={this.props.navigation}
               pantryList={this.state.pantryList[`${item}`]}
             ></LocationCard>
           )}
+          keyExtractor={(item) => item}
           ListEmptyComponent={
             <Text
               style={{
@@ -175,10 +169,32 @@ export default class HomeScreen extends Component {
     );
   }
 }
+
+// TODO: Define shared custom stack navigator with global options
+const Stack = createStackNavigator();
+
+export default function HomeStackScreen() {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: true,
+        headerStyle: {
+          backgroundColor: "#6C8241",
+        },
+        headerTintColor: "#FFFFFF",
+      }}
+    >
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Pantries" component={PantryScreen} />
+
+      {/* <Stack.Screen name="Details" component={DetailsScreen} /> */}
+    </Stack.Navigator>
+  );
+}
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#eeeeee",
-    justifyContent: "flex-start",
+    justifyContent: "center",
   },
 });

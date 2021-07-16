@@ -1,22 +1,15 @@
-import React, { Component } from "react";
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  View,
-  FlatList,
-  StatusBar,
-} from "react-native";
-import PantryCard from "./components/PantryCard";
-import LocationCard from "./components/LocationCard";
-import Ionicons from "react-native-vector-icons/Ionicons";
+import * as React from "react";
+import { Platform, View, Text } from "react-native";
+
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import HomeScreen from "./HomeScreen";
-import SocialScreen from "./SocialScreen";
-import PantryScreen from "./PantryScreen";
+import HomeScreenStack from "./HomeScreen";
+import SocialScreenStack from "./SocialScreen";
 import { Notifications } from "expo";
 import * as Permissions from "expo-permissions";
 import { NavigationContainer } from "@react-navigation/native";
+
+import { Ionicons } from "@expo/vector-icons";
+
 // Push notifcations
 const PUSH_ENDPOINT = "https://fredfoodva.herokuapp.com/push_token";
 
@@ -58,16 +51,16 @@ async function registerForPushNotifications() {
       },
     }),
   });
-  console.log("function called");
 }
 registerForPushNotifications();
 
 const Tab = createBottomTabNavigator();
 
-function App() {
+export default function TabNavigator() {
   return (
     <NavigationContainer>
       <Tab.Navigator
+        initialRouteName={"Home"}
         tabBarOptions={{
           activeTintColor: "#F59300",
           inactiveTintColor: "white",
@@ -75,39 +68,29 @@ function App() {
             backgroundColor: "#6C8241",
           },
         }}
-        screenOptions={{
-          headerStyle: {
-            backgroundColor: "#6C8241",
-          },
-          headerTintColor: "#FFFFFF",
-        }}
       >
         <Tab.Screen
           name="Home"
           options={{
-            title: "Locations",
             tabBarLabel: "Locations",
             tabBarIcon: ({ color, size }) => (
-              <IconComponent name={"md-map"} size={size} color={color} />
+              <Ionicons name={"md-map"} size={size} color={color} />
             ),
-            tabBarBadge: 3,
           }}
-          component={HomeScreen}
+          component={HomeScreenStack}
         />
         <Tab.Screen
           name="Updates"
-          component={SocialScreen}
+          component={SocialScreenStack}
           options={{
-            title: "Updates",
             tabBarLabel: "Updates",
             tabBarIcon: ({ color, size }) => (
-              <IconComponent name={"md-cloud"} size={size} color={color} />
+              <Ionicons name={"md-cloud"} size={size} color={color} />
             ),
-            tabBarBadge: 3,
+            tabBarBadge: 5,
           }}
         />
       </Tab.Navigator>
     </NavigationContainer>
   );
 }
-export default App;
