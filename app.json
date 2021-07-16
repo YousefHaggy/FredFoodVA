@@ -3,13 +3,12 @@
     "name": "FredFoodVA",
     "slug": "FredFoodVA",
     "privacy": "public",
-    "sdkVersion": "34.0.0",
     "platforms": [
       "ios",
       "android",
       "web"
     ],
-    "primaryColor":"#f59300",
+    "primaryColor": "#f59300",
     "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -25,14 +24,13 @@
       "**/*"
     ],
     "ios": {
-            "icon":"./assets/iconApple.png",
-
-      "bundleIdentifier":"com.yousefhaggy.fredfoodva",
+      "icon": "./assets/iconApple.png",
+      "bundleIdentifier": "com.yousefhaggy.fredfoodva",
       "supportsTablet": true
     },
     "android": {
-      "versionCode":3,
-      "permissions":[],
+      "versionCode": 3,
+      "permissions": [],
       "package": "com.yousefhaggy.fredfoodva"
     },
     "description": ""

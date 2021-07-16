@@ -90,17 +90,6 @@ export default class HomeScreen extends Component {
           await AsyncStorage.setItem("areaList", areaList);
         } catch (error) {}
       };
-      /*await this.getLocationAsync();
-              if (this.state.location != null) {console.log(this.state.location);
-                  locationDetails=responseJson;
-                  locationDetails["location"]=this.state.location;
-                  response = await fetch('https://fredfoodbank.herokuapp.com/getNearestPantry', {
-                      method: 'GET',
-                      body: JSON.stringify(locationDetails)
-                  });
-                  responseJson = await response.json();
-                  this.setState({ nearestPantry: responseJson });
-              }*/
     } catch (error) {
       _retrieveData = async () => {
         const pantryList = await AsyncStorage.getItem("pantryList");
@@ -112,14 +101,6 @@ export default class HomeScreen extends Component {
       };
     }
   }
-  /* async getLocationAsync() {
-           let { status } = await Permissions.askAsync(Permissions.LOCATION);
-           if (status === "granted") {
-               let location = await Location.getCurrentPositionAsync({});
-               location= await Location.reverseGeocodeAsync(location);
-               this.setState({ location });
-           }
-       }*/
   filterList() {}
   componentDidMount() {
     this.getPantries();
